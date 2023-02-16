@@ -9,7 +9,7 @@
                              "paper_weight", "colors_number",
                              "resolution", "print_speed", 
                              "cartridge_count", "tray_capacity",
-                             "paper_format", "print_technology"],
+                             "paper_format"],
                 "properties": {
                     "manufacturer": {
                         "bsonType": "string",
@@ -40,10 +40,7 @@
                     },
                     "paper_format": {
                         "bsonType": "string",
-                        "oneOf": ["A3", "A4, A5"]
-                    },
-                    "print_technology": {
-                        "bsonType": "print_technology"
+                        "oneOf": ["A3", "A4", "A5"]
                     }
                 }
             }
@@ -52,7 +49,17 @@
     {
         "collection_name": "category",
         "validator": {
-            
+            "$jsonSchema": {
+                "bsonType": "object",
+                "title": "Category validation",
+                "required": ["name"],
+                "properties": {
+                    "name": {
+                        "bsonType": "string",
+                        "oneOf": ["Лазерный", "Светодиодный", "Струйный"]
+                    }
+                }
+            }
         }
     },
     {

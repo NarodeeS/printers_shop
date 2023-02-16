@@ -17,7 +17,7 @@ class Mongo:
     def __init__(self) -> None:
         connection_string = f'mongodb://{self.username}:{self.password}@{self.address}/{self.database_name}?retryWrites=true'
         client = pymongo.MongoClient(connection_string)
-        self.db = client.get_database()
+        self.db = client.get_database(self.database_name)
         # self._create_collections()
 
     def _create_collections(self) -> None:
