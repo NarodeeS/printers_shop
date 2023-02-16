@@ -1,0 +1,70 @@
+[
+    {
+        "collection_name": "printer",
+        "validator": {
+            "$jsonSchema": {
+                "bsonType": "object",
+                "title": "Printer validation",
+                "required": ["manufacturer", "printer_name", 
+                             "paper_weight", "colors_number",
+                             "resolution", "print_speed", 
+                             "cartridge_count", "tray_capacity",
+                             "paper_format", "print_technology"],
+                "properties": {
+                    "manufacturer": {
+                        "bsonType": "string",
+                        "maximum": 50
+                    },
+                    "printer_name": {
+                        "bsonType": "string",
+                        "maximum": 50
+                    },
+                    "paper_weight": {
+                        "bsonType": "int"
+                    },
+                    "colors_number": {
+                        "bsonType": "int"
+                    },
+                    "resolution": {
+                        "bsonType": "string"
+                    },
+                    "print_speed": {
+                        "bsonType": "int",
+                        "description": "pages per minute"
+                    },
+                    "cartridge_count": {
+                        "bsonType": "int"
+                    },
+                    "tray_capacity": {
+                        "bsonType": "int"
+                    },
+                    "paper_format": {
+                        "bsonType": "string",
+                        "oneOf": ["A3", "A4, A5"]
+                    },
+                    "print_technology": {
+                        "bsonType": "print_technology"
+                    }
+                }
+            }
+        }
+    },
+    {
+        "collection_name": "category",
+        "validator": {
+            
+        }
+    },
+    {
+        "collection_name": "manager",
+        "validator": {
+            
+        }
+    },
+    {
+        "collection_name": "worker",
+        "validator": {
+            
+        }
+    }
+]
