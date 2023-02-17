@@ -1,0 +1,169 @@
+[
+    {
+        "collection_name": "printers",
+        "validator": {
+            "$jsonSchema": {
+                "bsonType": "object",
+                "title": "Printer validation",
+                "required": [
+                    "manufacturer",
+                    "printer_name",
+                    "paper_weight",
+                    "colors_number",
+                    "resolution",
+                    "print_speed",
+                    "cartridge_count",
+                    "tray_capacity",
+                    "paper_format",
+                    "category_id",
+                    "amount",
+                    "price"
+                ],
+                "properties": {
+                    "manufacturer": {
+                        "bsonType": "string",
+                        "maximum": 50
+                    },
+                    "printer_name": {
+                        "bsonType": "string",
+                        "maximum": 50
+                    },
+                    "paper_weight": {
+                        "bsonType": "int"
+                    },
+                    "colors_number": {
+                        "bsonType": "int"
+                    },
+                    "resolution": {
+                        "bsonType": "string"
+                    },
+                    "print_speed": {
+                        "bsonType": "int",
+                        "description": "pages per minute"
+                    },
+                    "cartridge_count": {
+                        "bsonType": "int"
+                    },
+                    "tray_capacity": {
+                        "bsonType": "int"
+                    },
+                    "paper_format": {
+                        "bsonType": "string"
+                    },
+                    "category_id": {
+                        "bsonType": "objectId"
+                    },
+                    "amount": {
+                        "bsonType": "int"
+                    },
+                    "price": {
+                        "bsonType": "int"
+                    }
+                }
+            }
+        }
+    },
+    {
+        "collection_name": "categories",
+        "validator": {
+            "$jsonSchema": {
+                "bsonType": "object",
+                "title": "Category (printing technology) validation",
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "name": {
+                        "bsonType": "string"
+                    }
+                }
+            }
+        }
+    },
+    {
+        "collection_name": "workers",
+        "validator": {
+            "$jsonSchema": {
+                "bsonType": "object",
+                "title": "Worker validation",
+                "required": [
+                    "name",
+                    "surname",
+                    "position"
+                ],
+                "properties": {
+                    "name": {
+                        "bsonType": "string"
+                    },
+                    "position": {
+                        "bsonType": "string"
+                    }
+                }
+            }
+        }
+    },
+    {
+        "collection_name": "clients",
+        "validator": {
+            "$jsonSchema": {
+                "bsonType": "object",
+                "title": "Client validation",
+                "required": [
+                    "name",
+                    "phone",
+                    "email"
+                ],
+                "properties": {
+                    "name": {
+                        "bsonType": "string"
+                    },
+                    "phone": {
+                        "bsonType": "string"
+                    },
+                    "email": {
+                        "bsonType": "string"
+                    }
+                }
+            }
+        }
+    },
+    {
+        "collection_name": "orders",
+        "validator": {
+            "$jsonSchema": {
+                "bsonType": "object",
+                "title": "Order validation",
+                "required": [
+                    "client_id",
+                    "status",
+                    "products"
+                ],
+                "properties": {
+                    "client_id": {
+                        "bsonType": "objectId"
+                    },
+                    "status": {
+                        "bsonType": "string"
+                    },
+                    "products": {
+                        "bsonType": [
+                            "object"
+                        ],
+                        "required": [
+                            "product_id",
+                            "amount"
+                        ],
+                        "properties": {
+                            "product_id": {
+                                "bsonType": "objectId"
+                            },
+                            "amount": {
+                                "bsonType": "int"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+]
