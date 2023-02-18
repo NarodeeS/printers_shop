@@ -3,15 +3,8 @@ import json
 
 import pymongo
 from pymongo.errors import PyMongoError
-from dotenv import load_dotenv
 
-
-load_dotenv()
-
-
-connection_format = "mongodb://{}:{}@{}/{}"
-address = os.getenv("ADDRESS")
-database_name = "printers_db"
+from db import *
 
 
 class MongoCreator:
@@ -19,8 +12,8 @@ class MongoCreator:
 
     username = os.getenv("MONGO_INITDB_ROOT_USERNAME")
     password = os.getenv("MONGO_INITDB_ROOT_PASSWORD")
-    collections_data_file = "db_interaction/data/collections_data.json"
-    roles_data_file = "db_interaction/data/roles_data.json"
+    collections_data_file = "db/data/collections_data.json"
+    roles_data_file = "db/data/roles_data.json"
 
     def __init__(self) -> None:
         connection_string = connection_format.format(
@@ -54,14 +47,3 @@ class MongoCreator:
     def _get_json_data(self, path: str) -> list:
         with open(path, "r", encoding="utf-8") as file:
             return json.load(file)
-
-
-class MongoClient:
-    """Class for with mongo database"""
-
-    def __init__(self, username: str, password: str) -> None:
-        connection_string = connection_format.format(
-            username, password, address, database_name
-        )
-        client = pymongo.MongoClient(connection_string)
-        self._db = client.get_database(database_name)
