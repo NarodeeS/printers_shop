@@ -1,7 +1,8 @@
 import os
 import json
-import dotenv
+
 import pymongo
+from pymongo.errors import PyMongoError
 from dotenv import load_dotenv
 
 
@@ -10,7 +11,7 @@ load_dotenv()
 
 connection_format = "mongodb://{}:{}@{}/{}"
 address = os.getenv("ADDRESS")
-database_name = "printers"
+database_name = "printers_db"
 
 
 class MongoCreator:
@@ -18,7 +19,8 @@ class MongoCreator:
 
     username = os.getenv("MONGO_INITDB_ROOT_USERNAME")
     password = os.getenv("MONGO_INITDB_ROOT_PASSWORD")
-    collections_data_file = "./collections_data.json"
+    collections_data_file = "db_interaction/data/collections_data.json"
+    roles_data_file = "db_interaction/data/roles_data.json"
 
     def __init__(self) -> None:
         connection_string = connection_format.format(
@@ -27,27 +29,31 @@ class MongoCreator:
         connection_string += "?authSource=admin"
         client = pymongo.MongoClient(connection_string)
         self.db = client.get_database(database_name)
-        self._create_collections()
-        self._create_roles()
 
-    def _create_collections(self) -> None:
-        with open(self.collections_data_file, "r") as file:
-            collections_data = json.load(file)
-
-        for collection_data in collections_data:
-            self.db.create_collection(
-                collection_data["collection_name"],
-                validator=collection_data["validator"],
-            )
-
-    def _create_roles(self) -> None:
-        role_name = "worker"
-        self.db.command(
-            "createRole",
-            role_name,
-            privileges=[{"resource": {"cluster": True}, "actions": ["inprog"]}],
-            roles=[],
-        )
+    def create_collections(self) -> None:
+        for collection_data in self._get_json_data(self.collections_data_file): 
+            try:
+                self.db.create_collection(
+                    collection_data["collection_name"],
+                    validator=collection_data["validator"],
+                )
+            except PyMongoError as e:
+                print(e)
+                return
+    
+    def create_roles(self) -> None:
+        for role_data in self._get_json_data(self.roles_data_file):
+            try:
+                self.db.command("createRole", role_data["role"], 
+                                privileges=role_data["privileges"],
+                                roles=[]
+                )
+            except PyMongoError as e:
+                print(e)
+        
+    def _get_json_data(self, path: str) -> list:
+        with open(path, "r", encoding="utf-8") as file:
+            return json.load(file)
 
 
 class MongoClient:

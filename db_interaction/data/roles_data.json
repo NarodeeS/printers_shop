@@ -1,0 +1,156 @@
+[
+    {
+        "role": "admin",
+        "privileges": [
+            {
+                "resource": {
+                    "db": "printers_db",
+                    "collection": "printers"
+                },
+                "actions": [
+                    "find",
+                    "insert",
+                    "remove",
+                    "update"
+                ]
+            },
+            {
+                "resource": {
+                    "db": "printers_db",
+                    "collection": "categories"
+                },
+                "actions": [
+                    "find",
+                    "insert",
+                    "remove",
+                    "update"
+                ]
+            },
+            {
+                "resource": {
+                    "db": "printers_db",
+                    "collection": "workers"
+                },
+                "actions": [
+                    "find",
+                    "insert",
+                    "remove",
+                    "update"
+                ]
+            },
+            {
+                "resource": {
+                    "db": "printers_db",
+                    "collection": "clients"
+                },
+                "actions": [
+                    "find",
+                    "insert",
+                    "remove",
+                    "update"
+                ]
+            },
+            {
+                "resource": {
+                    "db": "printers_db",
+                    "collection": "orders"
+                },
+                "actions": [
+                    "find",
+                    "insert",
+                    "remove",
+                    "update"
+                ]
+            }
+        ],
+        "roles": []
+    },
+    {
+        "role": "manager",
+        "privileges": [
+            {
+                "resource": {
+                    "db": "printers_db",
+                    "collection": "printers"
+                },
+                "actions": [
+                    "find",
+                    "insert",
+                    "remove",
+                    "update"
+                ]
+            },
+            {
+                "resource": {
+                    "db": "printers_db",
+                    "collection": "categories"
+                },
+                "actions": [
+                    "find",
+                    "insert",
+                    "remove",
+                    "update"
+                ]
+            }
+        ],
+        "roles": []
+    },
+    {
+        "role": "client",
+        "privileges": [
+            {
+                "resource": {
+                    "db": "printers_db",
+                    "collection": "printers"
+                },
+                "actions": [
+                    "find"
+                ]
+            },
+            {
+                "resource": {
+                    "db": "printers_db",
+                    "collection": "categories"
+                },
+                "actions": [
+                    "find"
+                ]
+            },
+            {
+                "resource": {
+                    "db": "printers_db",
+                    "collection": "orders"
+                },
+                "actions": [
+                    "find",
+                    "insert"
+                ]
+            }
+        ],
+        "roles": []   
+    },
+    {
+        "role": "guest",
+        "privileges": [
+            {
+                "resource": {
+                    "db": "printers_db",
+                    "collection": "printers"
+                },
+                "actions": [
+                    "find"
+                ]
+            },
+            {
+                "resource": {
+                    "db": "printers_db",
+                    "collection": "categories"
+                },
+                "actions": [
+                    "find"
+                ]
+            }
+        ],
+        "roles": []   
+    }
+]

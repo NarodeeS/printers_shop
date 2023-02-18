@@ -136,7 +136,8 @@
                 "required": [
                     "client_id",
                     "status",
-                    "products"
+                    "products",
+                    "date"
                 ],
                 "properties": {
                     "client_id": {
@@ -146,21 +147,25 @@
                         "bsonType": "string"
                     },
                     "products": {
-                        "bsonType": [
-                            "object"
-                        ],
-                        "required": [
-                            "product_id",
-                            "amount"
-                        ],
-                        "properties": {
-                            "product_id": {
-                                "bsonType": "objectId"
-                            },
-                            "amount": {
-                                "bsonType": "int"
+                        "bsonType": ["array"],
+                        "items": {
+                            "bsonType": "object",
+                            "required": [
+                                "product_id",
+                                "amount"
+                            ],
+                            "properties": {
+                                "product_id": {
+                                    "bsonType": "objectId"
+                                },
+                                "amount": {
+                                    "bsonType": "int"
+                                }
                             }
                         }
+                    },
+                    "date": {
+                        "bsonType": "date"
                     }
                 }
             }
