@@ -13,7 +13,7 @@
     "printers": [
         {
             "manufacturer": "HP",
-            "priner_name": "Color LaserJet 150nw",
+            "printer_name": "Color LaserJet 150nw",
             "paper_weight": 60,
             "colors_number": 2,
             "resolution": "600x600",
@@ -27,7 +27,7 @@
         },
         {
             "manufacturer": "Epson",
-            "priner_name": "L805",
+            "printer_name": "L805",
             "paper_weight": 300,
             "colors_number": 2,
             "resolution": "5760x1440",

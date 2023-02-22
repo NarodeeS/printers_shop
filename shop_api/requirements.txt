@@ -1,5 +1,6 @@
 pymongo
-python_dotenv
 pytest
 fastapi
 SQLAlchemy
+psycopg2
+uvicorn

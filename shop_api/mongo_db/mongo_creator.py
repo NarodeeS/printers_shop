@@ -4,9 +4,9 @@ from pathlib import Path
 
 import pymongo
 from pymongo.errors import PyMongoError
-from db.mongo_client import MongoClient
+from .mongo_client import MongoClientHandler
 
-from db import *
+from . import *
 
 
 class MongoCreator:
@@ -49,7 +49,7 @@ class MongoCreator:
             pwd=password,
             roles=[{"role": role, "db": database_name}],
         )
-        return MongoClient(username, password)
+        return MongoClientHandler()
 
     def _user_exists(self, username: str) -> bool:
         user_objects = self.db.command("usersInfo")["users"]

@@ -1,4 +1,4 @@
-from db.mongo_creator import MongoCreator
+from .mongo_creator import MongoCreator
 
 
 def create_db() -> None:

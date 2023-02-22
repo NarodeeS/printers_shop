@@ -4,17 +4,20 @@ import pymongo
 from bson.objectid import ObjectId
 from pymongo.cursor import Cursor
 
-from db import *
+from . import *
 
 
-class MongoClient:
+class MongoClientHandler:
     """Class for work with mongo database"""
-
-    def __init__(self, username: str, password: str) -> None:
+    
+    username = os.getenv("MONGO_INITDB_ROOT_USERNAME")
+    password = os.getenv("MONGO_INITDB_ROOT_PASSWORD")
+    
+    def __init__(self ) -> None:
         connection_string = connection_format.format(
-            username, password, address, database_name
+            self.username, self.password, address, database_name
         )
-        connection_string += f"?authSource={database_name}"
+        connection_string += f"?authSource=admin" # {database_name}
 
         client = pymongo.MongoClient(connection_string)
         self.db = client.get_database(database_name)
@@ -71,3 +74,27 @@ class MongoClient:
                     continue
                 bascket_counter += one_printer["price"]
         return bascket_counter
+    
+    def get_all_printers(self) -> dict: 
+        try:
+            all_printers = list(self.db.printers.find({}))
+            for i in all_printers:
+                i['category_id'] = str(i['category_id'])
+            return {"printers": all_printers}
+        except Exception as e:
+            return {'error': str(e)}
+        
+    def add_new_printer(self, new_printer: dict) -> dict:
+           try:
+               new_printer['category_id'] = ObjectId(new_printer['category_id'])
+               self.db.printers.insert_one(new_printer)
+               return {'status': 200} 
+           except Exception as e:
+               return {'error': str(e)}          
+               
+    def delele_one_printer(self, item_id :str) -> dict:
+        try:
+            self.db.printers.delete_one({'_id': ObjectId(item_id)})
+            return {'status': 200} 
+        except Exception as e:
+            return {'error': str(e)}
