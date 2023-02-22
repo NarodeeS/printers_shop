@@ -1,13 +1,35 @@
 version: "3.9"
 
 services:
+    shop_api:
+        build: ./shop_api
+        container_name: shop_api
+        env_file:
+            - ./shop_api/.env
+        ports:
+            - 80:8080
+        depends_on:
+            - mongodb
+            - postgres
+
     mongodb:
         image: mongo:5.0
         restart: unless-stopped
-        container_name: mongodb
-        ports:
-            - 27017:27017
+        container_name: mongodb_shop
+        expose:
+            - 27017
         env_file:
-            - ./.env
+            - ./mongo/.env
         volumes:
-            - ./mongo/db/:/data/db
+            - ./mongo/data/:/data/db
+
+    postgres:
+        image: postgres
+        restart: unless-stopped
+        container_name: postgres_shop
+        expose:
+            - 5432
+        env_file:
+            - ./postgres/.env
+        volumes:
+            - ./postgres/data:/var/lib/postgresql/data

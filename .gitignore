@@ -3,7 +3,8 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-/mongo/db/*
+/mongo/data/*
+/postgres/data/*
 pyrightconfig.json
 
 # C extensions
