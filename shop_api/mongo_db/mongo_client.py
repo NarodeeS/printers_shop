@@ -15,7 +15,7 @@ class MongoClientHandler:
     
     def __init__(self ) -> None:
         connection_string = connection_format.format(
-            self.username, self.password, address, database_name
+            self.username, self.password, database_name
         )
         connection_string += f"?authSource=admin" # {database_name}
 

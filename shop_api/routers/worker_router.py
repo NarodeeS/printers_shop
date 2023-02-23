@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from fastapi import APIRouter, Depends, Response, status, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, status
 
 from postgres_db.get_session import get_session
 from postgres_db.models import Worker

@@ -19,7 +19,7 @@ class MongoCreator:
 
     def __init__(self) -> None:
         connection_string = connection_format.format(
-            self.username, self.password, address, database_name
+            self.username, self.password, database_name
         )
 
         connection_string += "?authSource=admin"
@@ -38,7 +38,7 @@ class MongoCreator:
                 print(e)
                 return
 
-    def create_user(self, username: str, password: str, role: str) -> MongoClient:
+    def create_user(self, username: str, password: str, role: str) -> MongoClientHandler:
         if self._user_exists(username):
             raise PyMongoError("User already exists")
         if not self._role_exists(role):

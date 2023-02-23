@@ -5,7 +5,6 @@ def wait_unlesss_db_started() -> None:
     connected = False
     while not connected:
         if database_started():
-            print("----------------------------------------")
             connected = True
 
 
