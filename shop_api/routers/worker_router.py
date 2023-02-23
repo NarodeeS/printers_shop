@@ -1,4 +1,5 @@
 from sqlalchemy.orm import Session
+from sqlalchemy.exc import IntegrityError
 from fastapi import APIRouter, Depends, HTTPException, status
 
 from postgres_db.get_session import get_session
@@ -17,11 +18,15 @@ def get_workers(postgres_session: Session = Depends(get_session)):
 @worker_router.post('/', response_model=ReturnWorkerSchema)
 def create_worker(new_worker: CreateWorkerSchema,
                   postgres_session: Session = Depends(get_session)):
-    worker = Worker(**new_worker.dict())
-    postgres_session.add(worker)
-    postgres_session.commit()
-    postgres_session.refresh(worker)
-    return worker
+    try:    
+        worker = Worker(**new_worker.dict())
+        postgres_session.add(worker)
+        postgres_session.commit()
+        postgres_session.refresh(worker)
+        return worker
+    except IntegrityError as e:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, 
+                             detail=str(e._message()))
 
 
 @worker_router.delete('/{id:int}', status_code=200)

@@ -12,6 +12,6 @@ def database_started() -> bool:
     try:
         engine.connect()
         return True
-    except RuntimeError as e:
+    except Exception as e:
         print(e)
         return False
