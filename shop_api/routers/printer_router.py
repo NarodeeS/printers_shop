@@ -12,8 +12,6 @@ printer_router = APIRouter(prefix='/printers', tags=['printers'])
 def get_printers():
    client = MongoClientHandler()
    all_printers = client.get_all_printers()
-   print(all_printers)
-   print(type(all_printers))
    return all_printers
 
 
@@ -25,7 +23,7 @@ def post_printers(new_printer: CreatePrinterSchema):
         
 
 @printer_router.delete('/{item_id}')
-def delete_printers(item_id: int):
+def delete_printers(item_id: str):
     client = MongoClientHandler()
     all_printers = client.delele_one_printer(item_id=item_id)
     return all_printers

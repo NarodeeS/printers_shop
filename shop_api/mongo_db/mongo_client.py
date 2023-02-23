@@ -78,8 +78,11 @@ class MongoClientHandler:
     def get_all_printers(self) -> dict: 
         try:
             all_printers = list(self.db.printers.find({}))
+            print(all_printers)
+            print('after all') 
             for i in all_printers:
                 i['category_id'] = str(i['category_id'])
+                i['_id'] = str(i['_id'])
             return {"printers": all_printers}
         except Exception as e:
             return {'error': str(e)}
