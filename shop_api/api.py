@@ -20,10 +20,5 @@ app.include_router(printer_router)
 app.include_router(worker_router)
 
 
-@app.get('/')
-def home():
-    return {'message': 'OK'}
-
-
 def get_app():
     return app
