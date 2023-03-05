@@ -1,0 +1,27 @@
+#  docker-compose файл для поднятия инфраструктуры для тестирования
+version: '3.9'
+
+services:
+  allure_service:
+    image: "frankescobar/allure-docker-service"
+    restart: unless-stopped
+    env_file:
+      - ./.env
+    ports:
+      - "5050:5050"
+    volumes:
+      - ${ALLURE_REPORTS_PATH}:/app/allure-results
+      - ${ALLURE_REPORTS_PATH}:/app/allure-reports
+    network_mode: host
+
+  api_tests:
+    build: ${PWD}/pytest
+    depends_on:
+      - allure_service
+    env_file:
+      - ./.env
+    depends_on:
+      - allure_service
+    volumes:
+      - ${ALLURE_REPORTS_PATH}:/app/allure_reports
+    network_mode: "host"

@@ -30,3 +30,9 @@ class CreatePrinterSchema(BaseModel):
     category_id: str
     amount: int 
     price: int
+
+
+class ReturnCategorySchema(BaseModel):
+    id: str
+    name: str
+    

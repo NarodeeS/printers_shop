@@ -86,6 +86,12 @@ class MongoClientHandler:
             return {"printers": all_printers}
         except Exception as e:
             return {'error': str(e)}
+    
+    def get_all_categories(self) -> list:
+        all_categories = list(self.db.categories.find({}))
+        for category in all_categories:
+            category['id'] = str(category['_id'])
+        return all_categories
         
     def add_new_printer(self, new_printer: dict) -> dict:
            try:

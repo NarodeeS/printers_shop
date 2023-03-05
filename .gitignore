@@ -6,7 +6,9 @@ __pycache__/
 /mongo/data/*
 /postgres/data/*
 pyrightconfig.json
+api_tests/allure/allure_reports/*
 
+*DS_Store 
 # C extensions
 *.so
 
